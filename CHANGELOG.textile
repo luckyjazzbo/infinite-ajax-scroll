@@ -1,3 +1,9 @@
+h1. 0.1.2-farooq / 2011-11-23
+
+Customized version for Farooq A.Aziz.
+
+* Added firstPage option to load the first page results via AJAX
+
 h1. 0.1.2 / 2011-08-08
 
 * Fixed bug causing IAS not working in IE8, thanks to Varun Mishra.

@@ -2,7 +2,7 @@ h1. Infinite Ajax Scroll
 
 Turn your paginated pages into infinite scrolling pages with ease.
 
-Version 0.1.1
+Version 0.1.2-farooq
 
 Requires jQuery 1.4 or newer. 
 
@@ -32,6 +32,7 @@ bc. jQuery.ias({
 	pagination: "#content .navigation",
 	next: ".next-posts a",
 	loader: "images/loader.gif"
+	firstPage: "first_page.php"
 });
 
 You can use IAS multiple times within a single webpage. For example, you can have an IAS definition for paginating blogposts and one for comments.
@@ -78,6 +79,11 @@ Parameters:
 Example:
 
 bc. onPageChange: function(pageNum, pageUrl, scrollOffset) { console.log('Welcome on page ' + pageNum); } 
+
+h3. firstPage
+
+*Default:* false
+Can be used to let IAS load the first page results via AJAX.
 
 h2. Customizing
 

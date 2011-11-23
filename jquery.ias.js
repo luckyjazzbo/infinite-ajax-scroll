@@ -1,6 +1,6 @@
 /*!
  * Infinite Ajax Scroll, a jQuery plugin 
- * Version v0.1.2
+ * Version v0.1.2-farooq
  * http://webcreate.nl/
  *
  * Copyright (c) 2011 Jeroen Fiege
@@ -43,6 +43,43 @@
 			// setup scroll and hide pagination
 			reset();
 			
+			// load the first page results
+			if (opts.firstPage) {
+				show_loader();
+				
+				loadItems(opts.firstPage, function(data, items) {
+					// walk through the items on the next page
+					// and insert them with a nice fadeIn effect
+					for(i=0;i<items.length;i++) {
+						var item = items[i];
+						item.hide(); // at first, hide it so we can fade it in later
+						
+						curLastItem = $(opts.container).find(opts.item).last();
+						curLastItem.after(item);
+						item.fadeIn();
+					}
+					
+					// update pagination
+					$(opts.pagination).replaceWith($(opts.pagination, data));
+					
+					remove_loader();
+					reset();
+					
+					init_hist();
+				});
+				
+				return;
+			}
+			else {
+				init_hist();
+			}
+		}
+		
+		/**
+		 * Init history module
+		 */
+		function init_hist()
+		{
 			// load and scroll to previous page
 			if (hist.havePage()) {
 				stop_scroll();
@@ -280,7 +317,8 @@
 		item: ".item",
 		pagination: "#pagination",
 		next: ".next",
-		onPageChange: function() {}
+		onPageChange: function() {},
+		firstPage: false
 	};
 	
 	// utility module
