@@ -25,17 +25,14 @@
     <div id="main" role="main">
 		
 		<h1>Infinite AJAX Scroll Demo</h1>
-        <div style="margin-bottom: 50px;">
-            <button onclick="my_ias.prependPage('update_page.php')">update</button>
-        </div>
 		
 		<div class="posts">
 			<div class="post">
 				<?php 
-					$items_per_page = 5;
-					$cur_page = ($_GET["page"] ? (int) $_GET["page"] : 0);
+					sleep(2);
 					
-					if ($cur_page == 0) $items_per_page = 0;
+					$items_per_page = 2;
+					$cur_page = ($_GET["page"] ? (int) $_GET["page"] : 0);
 					
 					// add some loading time
 					if ($cur_page > 0) sleep(1);
@@ -45,8 +42,10 @@
 					
 					for($i=$offset;$i<$limit;$i++):
 				?>
-					<h2>Item <?php echo $i; ?></h2>
-					<p>Pellentesque vel dui sed orci faucibus iaculis. Suspendisse dictum magna id purus tincidunt rutrum. Nulla congue. Vivamus sit amet lorem posuere dui vulputate ornare. Phasellus mattis sollicitudin ligula. Duis dignissim felis et urna. Integer adipiscing congue metus. Nam pede. Etiam non wisi. Sed accumsan dolor ac augue. Pellentesque eget lectus. Aliquam nec dolor nec tellus ornare venenatis. </p>
+					<div style="background-color: lightblue;">
+                        <h2>Updated Item <?php echo $i; ?></h2>
+					   <p>Pellentesque vel dui sed orci faucibus iaculis. Suspendisse dictum magna id purus tincidunt rutrum. Nulla congue. Vivamus sit amet lorem posuere dui vulputate ornare. Phasellus mattis sollicitudin ligula. Duis dignissim felis et urna. Integer adipiscing congue metus. Nam pede. Etiam non wisi. Sed accumsan dolor ac augue. Pellentesque eget lectus. Aliquam nec dolor nec tellus ornare venenatis. </p>
+					</div>
 				<?php 
 					endfor;
 				?>
@@ -70,15 +69,13 @@
   <!-- scripts -->
   <script src="../jquery.ias.js"></script>
   <script>
-  	my_ias = jQuery.ias({
+  	jQuery.ias({
 		container : ".posts",
 		item: ".post",
 		pagination: ".navigation",
 		next: ".next-posts",
 		loader: "../images/loader.gif",
-        firstPage: "first_page.php"
 	});
-
   </script>
   <!-- end scripts-->
   

@@ -16,9 +16,7 @@
 		var util = new $.ias.util();		// utilities module
 		var paging = new $.ias.paging();	// paging module
 		var hist = new $.ias.history();		// history module
-		
-		// initialize
-		init();
+		var _self = this;
 		
 		/**
 		 * Initialize
@@ -28,7 +26,7 @@
 		 * - setup scroll event and hides pagination element
 		 * - loads and scrolls to previous page when we have something in our history
 		 * 
-		 * @return void
+		 * @return self
 		 */
 		function init()
 		{
@@ -45,6 +43,7 @@
 			
 			// load the first page results
 			if (opts.firstPage) {
+				stop_scroll();
 				show_loader();
 				
 				loadItems(opts.firstPage, function(data, items) {
@@ -68,11 +67,13 @@
 					init_hist();
 				});
 				
-				return;
+				return _self;
 			}
 			else {
 				init_hist();
 			}
+			
+			return _self;
 		}
 		
 		/**
@@ -256,7 +257,6 @@
 			}
 		}
 			
-		
 		/**
 		 * Return the active loader of creates a new loader
 		 * 
@@ -297,6 +297,30 @@
 			loader = get_loader();
 			loader.remove();
 		}
+		
+		/**
+		 * Prepends items from a page
+		 * 
+		 * @return void
+		 */
+		this.prependPage = function(url) 
+		{
+			loadItems(url, function(data, items) {
+				// walk through the items on the page
+				// and insert them with a nice fadeIn effect
+				for(i=0;i<items.length;i++) {
+					var item = items[i];
+					item.hide(); // at first, hide it so we can fade it in later
+					
+					curFirstItem = $(opts.container).find(opts.item).first();
+					curFirstItem.before(item);
+					item.fadeIn();
+				}
+			});
+		}
+		
+		// initialize
+		return init();
 	};
 
 	/**
@@ -478,6 +502,23 @@
 			pagebreaks.push([scrollOffset, urlNextPage]);
 		};
 	};
+	
+	$.ias.controller = function()
+	{
+		// initialize
+		init();
+		
+		/**
+		 * Initialize
+		 * 
+		 * @return void
+		 */
+		function init()
+		{
+		};
+		
+		
+	}
 	
 	// history module
 	$.ias.history = function() 

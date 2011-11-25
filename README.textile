@@ -26,7 +26,7 @@ Now place the loader image in you image folder and add the CSS to you existing s
 
 h2. Basic usage
 
-bc. jQuery.ias({
+bc. my_ias = jQuery.ias({
 	container : ".listing",
 	item: ".post",
 	pagination: "#content .navigation",
@@ -84,6 +84,22 @@ h3. firstPage
 
 *Default:* false
 Can be used to let IAS load the first page results via AJAX.
+
+h2. Methods
+
+h3. prepandPage
+
+Parameters:
+
+|*param*|*description*|
+|url|Url to page with item to load|
+
+Can be used to let IAS load the a page with updated items results via AJAX and prepend them in the page.
+
+Example:
+
+bc. my_ias.prependPage("update_page.php"); 
+
 
 h2. Customizing
 
