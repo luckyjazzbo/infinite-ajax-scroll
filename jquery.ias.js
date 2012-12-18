@@ -298,6 +298,11 @@
             loader = get_loader();
             loader.remove();
         }
+
+        return {
+            reset: reset,
+            stopScroll: stop_scroll
+        }
     };
 
     /**
